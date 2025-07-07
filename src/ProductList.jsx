@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+import { addItem } from './CartSlice';
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-
+    const [addedToCart, setAddedToCart] = useSate([]);
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -258,6 +259,15 @@ function ProductList({ onHomeClick }) {
         e.preventDefault();
         setShowCart(false);
     };
+
+    const handleAddToCart = (product) => {
+        
+        dispatch(addItem({product}))
+        setAddedToCart((prevState) => ({ // Update the local state to reflect that the product has been added
+            ...prevState, 
+            [product.name]: true,
+        }));
+    }
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -309,6 +319,10 @@ function ProductList({ onHomeClick }) {
                                 <p style={{ fontWeight: 'bold' }}>{plant.name}</p>
                                 <p style={{ fontSize: '0.875rem', color: '#666', textAlign: 'center' }}>{plant.description}</p>
                                 <p style={{ color: 'green', fontWeight: '600' }}>{plant.cost}</p>
+                                <button style={{color: 'green', border: '2px', borderRadius: '3px', boxShadow: ' 4px, 4px'}}
+                                    onClick={handleAddToCart(plant)}>
+                                    Add to Cart
+                                </button>
                                 </li>
                             ))}
                         </ul>
