@@ -227,6 +227,12 @@ function ProductList({ onHomeClick }) {
         alignItems: 'center',
         width: '1100px',
     }
+    const styleObjUl2 = {
+        display: 'flex',
+        flexdirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    }
     const styleA = {
         color: 'white',
         fontSize: '30px',
@@ -274,7 +280,40 @@ function ProductList({ onHomeClick }) {
             </div>
             {!showCart ? (
                 <div className="product-grid">
+                    {plantsArray.map((type, index) => (
+                    <section key={index} style={{ marginBottom: '2rem' }}>
+                        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{type.category}</h2>
 
+                        <ul style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            gap: '1rem',
+                            flexWrap: 'wrap'
+                            }}>
+                            {type.plants.map((plant, idx) => (
+                                <li key={idx} style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                border: '1px solid #ddd',
+                                padding: '1rem',
+                                width: '180px',
+                                borderRadius: '8px',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                                }}>
+                                <img
+                                    src={plant.image}
+                                    alt={plant.name}
+                                    style={{ width: '100%', height: '120px', objectFit: 'cover', marginBottom: '0.5rem' }}
+                                />
+                                <p style={{ fontWeight: 'bold' }}>{plant.name}</p>
+                                <p style={{ fontSize: '0.875rem', color: '#666', textAlign: 'center' }}>{plant.description}</p>
+                                <p style={{ color: 'green', fontWeight: '600' }}>{plant.cost}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+))}
 
                 </div>
             ) : (
