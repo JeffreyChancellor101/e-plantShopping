@@ -8,7 +8,6 @@ function ProductList({ onHomeClick }) {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.items); 
     const [showPlants, setShowPlants] = useState(false); 
-    const [addedToCart, setAddedToCart] = useState([]);
 
     const plantsArray = [
         {
@@ -324,7 +323,7 @@ function ProductList({ onHomeClick }) {
                             flexWrap: 'wrap'
                             }}>
                             {type.plants.map((plant, idx) => {
-                                const isInCart = addedToCart[plant.name] === true;
+                                const isInCart = cart.find(item => item.name === plant.name);
 
                                 return (
                                     <li key={idx} style={{
